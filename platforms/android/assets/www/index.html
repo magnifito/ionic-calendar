@@ -4,24 +4,47 @@
     <meta charset="UTF-8">
     <title>Ionic-Calendar</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    
+	
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="calendar.css">
+      <style>
+
+        .heightlight{          
+          padding: 9px 14px;
+          margin-bottom: 14px;
+          background-color: #F7F7F9;
+          border: 1px solid #E1E1E8;
+          border-radius: 4px;
+          background: #fff;
+        }
+        .well{
+          background: #ffd;
+        }
+
+        #Setup li{
+          margin: 20px 0;
+        }
+
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+	
     <!--IonicLibs -->
     
     <link rel="stylesheet" href="lib/ionic/css/ionic.css">
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     
-
+	
     
     <!--My App-->
     
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/app.js"></script>
+    <script src="calendar.js"></script>
 </head>
 
 
 <body class="platform-android platform-cordova platform-webview">
-	<div class="bar bar-header bar-energized">
-        <h1 class="title">aaa!</h1>
-    </div>
+        <div class="well">
+          <calendar></calendar>      
+        </div>
 </body>
 </html>

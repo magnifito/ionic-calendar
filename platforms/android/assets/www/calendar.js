@@ -1,6 +1,7 @@
 "use strict";
 
-var app = angular.module('ionic-calendar', ['ionic']);
+
+var app = angular.module('ionic-calendar', []);
 
 var language = {
 
@@ -31,10 +32,10 @@ var language = {
 
 };
 
-Date.prototype.getMonthFormatted = function () {
+Date.prototype.getMonthFormatted = function() {
     var month = this.getMonth() + 1;
     return month < 10 ? '0' + month : month;
-};
+}
 
 
 app.directive('ngHtml', function() {
@@ -176,7 +177,8 @@ app.directive("calendar", function(){
         },
         replace: true,
         link: calendarLinkFunction,
-        templateUrl: 'index.html'
+        templateUrl: 'calendar-template.html'
     }
 });
+
 

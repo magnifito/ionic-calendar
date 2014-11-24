@@ -176,7 +176,7 @@ app.directive("calendar", function(){
         },
         replace: true,
         link: calendarLinkFunction,
-        templateUrl: 'calendar-template.html'
+        templateUrl: 'index.html'
     }
 });
 

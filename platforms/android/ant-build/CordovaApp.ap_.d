@@ -29,6 +29,9 @@ D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\res\drawable-port-x
 D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\res\drawable-xhdpi\icon.png \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\_where-is-www.txt \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\calendar-template.html \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\calendar.css \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\calendar.js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\cordova.js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\cordova_plugins.js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\css \
