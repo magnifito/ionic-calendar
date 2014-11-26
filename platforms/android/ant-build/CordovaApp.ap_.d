@@ -30,8 +30,6 @@ D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\res\drawable-xhdpi\
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\_where-is-www.txt \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\calendar-template.html \
-D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\calendar.css \
-D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\calendar.js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\cordova.js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\cordova_plugins.js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\css \
@@ -41,9 +39,12 @@ D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\lib \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\plugins \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\README.md \
-D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\css\style.css \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\css\calendar.css \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\css\calendar.min.css \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\img\ionic.png \
-D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\js\app.js \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\js\calendar.js \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\js\controllers.js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\lib\ionic \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\lib\ionic\css \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\lib\ionic\fonts \
@@ -119,4 +120,10 @@ D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\plugins\com.ionic.
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\plugins\com.ionic.keyboard\www\keyboard.js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\plugins\org.apache.cordova.device\www \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\plugins\org.apache.cordova.device\www\device.js \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\browse.html \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\demo1.html \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\login.html \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\menu.html \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\playlist.html \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\playlists.html \
 D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\AndroidManifest.xml \
