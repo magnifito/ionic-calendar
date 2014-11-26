@@ -44,12 +44,11 @@ var app = angular.module('ionic-calendar', ['ionic', 'ionic-calendar.controllers
         }
       }
     })
-    .state('app.playlists', {
+    .state('app.demo2', {
       url: "/playlists",
       views: {
         'menuContent' :{
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
+          templateUrl: "templates/demo2.html",
         }
       }
     })

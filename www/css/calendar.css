@@ -7720,7 +7720,9 @@ a.button {
   font-weight: bolder;
   text-align: center;
   border: 1px solid #e1e1e1;
-  padding: 5px 0; }
+  padding: 5px 0;
+  background-color: #444;
+  color: #fff; }
   .cal-row-head [class*="cal-span"]:first-child [class*="cal-span"] small, .cal-row-head [class*="cal-span"] [class*="cal-span"] small {
     font-weight: normal; }
 

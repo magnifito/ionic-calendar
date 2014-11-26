@@ -94,18 +94,21 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   float: right;
 }
 [class*="cal-span"]:hover {
-  background-color: #ededed;
+      background-color: #ededed;
 }
 .cal-row-head {
     & [class*="cal-span"]:first-child,
     & [class*="cal-span"] {
-    min-height: auto;
-    font-weight: bolder;
-    text-align: center;
-    border: 1px solid #e1e1e1;
-    padding: 5px 0;
+        min-height: auto;
+        font-weight: bolder;
+        text-align: center;
+        border: 1px solid #e1e1e1;
+        padding: 5px 0;
+        background-color: $dark;
+        color:$light;
     & [class*="cal-span"] small {
     font-weight: normal;
+        
         }
     }
 }
