@@ -1,9 +1,13 @@
 <div class="calendar">
 	<div class="clearfix calendarHeader row"> 		
-		<div class="date">{{currentDate.getMonthFormatted() }}/{{currentDate.getFullYear() }}</div> 
+		 
 		<div class="btn-group"> 
-			<button class="button button-dark" ng-click="navigate.prevMotnth()">{{language.prevMonth}}</button> 
-			<button class="button button-dark" ng-click="navigate.thisMotnth()">{{language.thisMonth}}</button> 
+			<button class="button button-dark" ng-click="navigate.prevMotnth()">{{language.prevMonth}}</button>
+			<div class="month-name">
+			    <span>{{currentDate.getMonthName() }}</span>
+			    <span>{{currentDate.getFullYear() }}</span>
+			</div> 
+			
 			<button class="button button-dark" ng-click="navigate.nextMotnth()">{{language.nextMonth}}</button> 
 		</div> 
 	</div> 
