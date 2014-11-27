@@ -2,13 +2,15 @@
 	<div class="clearfix calendarHeader row"> 		
 		 
 		<div class="btn-group"> 
-			<button class="button button-dark" ng-click="navigate.prevMotnth()">{{language.prevMonth}}</button>
+			<button class="left button button-dark" ng-click="navigate.prevMotnth()">{{language.prevMonth}}</button>
 			<div class="month-name">
-			    <span>{{currentDate.getMonthName() }}</span>
-			    <span>{{currentDate.getFullYear() }}</span>
+			    <span>{{currentDate.getMonthName() }}
+			    {{currentDate.getFullYear() }}
+			    </span>
+			    
 			</div> 
 			
-			<button class="button button-dark" ng-click="navigate.nextMotnth()">{{language.nextMonth}}</button> 
+			<button class="right button button-dark" ng-click="navigate.nextMotnth()">{{language.nextMonth}}</button> 
 		</div> 
 	</div> 
 	<div class="cal-row-fluid cal-row-head">

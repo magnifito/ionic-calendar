@@ -22,24 +22,24 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import 'www/lib/ionic/scss/ionic';
 
 .calendarHeader{
-  margin: 0 auto;
   padding: 10px 0; 
   text-align: center;
     & .month-name {
         font-size: 20px;  
         text-align: center;
         color: #000;
-        line-height: 28px;
-        margin-bottom: 10px;
         margin-left:10px;
         margin-right:15px;
         display:inline-block;
-        width:33%;
-        
+        width:30%;
+        height:50px;
+        vertical-align: middle;
+        white-space: pre-line;
+        line-height:25px;
     }
     & .btn-group {
-    margin-bottom: 10px;
-    text-align: right;
+        margin-bottom: 10px;
+        width:100%;
     }
 }
 [class*="cal-span"] {
@@ -203,4 +203,8 @@ span[data-cal-date] {
 }
 .button.button-dark {
     background-color:$faceblue;
+    margin-top:27px;
+}
+.bar.bar-stable .title {
+    font-size:25px;
 }
