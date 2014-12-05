@@ -1,7 +1,7 @@
 "use strict";
 
 
-var app = angular.module('ionic-calendar', ['ionic', 'ionic-calendar.controllers'])
+var app = angular.module('ionic-calendar', ['ionic'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -24,7 +24,7 @@ var app = angular.module('ionic-calendar', ['ionic', 'ionic-calendar.controllers
         url: "/app",
         abstract: true,
         templateUrl: "templates/menu.html",
-        controller: 'AppCtrl'
+        controller: 'MyController'
     })
 
     .state('app.demo1', {
@@ -66,6 +66,16 @@ var app = angular.module('ionic-calendar', ['ionic', 'ionic-calendar.controllers
     $urlRouterProvider.otherwise('/app/demo1');
 });
 
+app.controller("MyController", function ($scope, $http) {
+    $http.get('js/events.txt').
+    success(function (data, status, headers, config) {
+        $scope.events = data;
+
+    }).
+    error(function (data, status, headers, config) {
+        // log error
+    });
+});
 
 var language = {
 
@@ -91,8 +101,8 @@ var language = {
     d6: 'Sat',
 
     thisMonth: "Today",
-    prevMonth: "Prev",
-    nextMonth: "Next",
+    prevMonth: "<< Prev",
+    nextMonth: "Next >>",
 
 };
 
@@ -104,7 +114,7 @@ Date.prototype.getMonthName = function () {
     var currentDate = new Date();
     var month = monthNames[this.getMonth()];
     return month < 10 ? '0' + month : month;
-    
+
 }
 
 Date.prototype.getMonthFormatted = function () {
@@ -170,7 +180,7 @@ var calendarLinkFunction = function (scope, element) {
     }
 
     // month between 1 ~ 12
-    var monthGenegrator = function (month, year) {
+    var monthGenegrator = function (month, year, events) {
         var monthArray = [];
         var firstDay = new Date(year, month - 1, 1, 0, 0, 0, 0);
         //  weekDay between 1 ~ 7 , 1 is Monday, 7 is Sunday
@@ -181,7 +191,7 @@ var calendarLinkFunction = function (scope, element) {
         var recordDate = 0; //record which day obj already genegrate
 
         //first week row
-        monthArray.push(weekGenegrator(year, month, recordDate - firstDayInFirstweek, daysOfMonth, prevDaysOfMonth));
+        monthArray.push(weekGenegrator(year, month, recordDate - firstDayInFirstweek, daysOfMonth, prevDaysOfMonth, events));
 
         recordDate = 7 - firstDayInFirstweek;
         //loop for following week row           
@@ -202,13 +212,15 @@ var calendarLinkFunction = function (scope, element) {
     }
 
     //month between 1~12
-    var weekGenegrator = function (year, month, startDate, daysOfMonth, prevDaysOfMonth) {
+    var weekGenegrator = function (year, month, startDate, daysOfMonth, prevDaysOfMonth, events) {
         var week = [];
+
         for (var i = 1; i <= 7; i++) {
             var
                 realDate,
                 outmonth = false,
                 content = "";
+            var events = [];
 
             if (startDate + i < 0) {
                 realDate = prevDaysOfMonth + startDate + i + 1;
@@ -224,19 +236,17 @@ var calendarLinkFunction = function (scope, element) {
                 "outmonth": outmonth,
                 "day": i,
                 "content": content,
-                "date": realDate
+                "date": realDate,
+                "events": events
+
             });
+
         }
         return week;
     }
 
-
-
-
-
-
-    var refreshCalendar = function () {
-        scope.month = monthGenegrator(scope.currentDate.getMonth() + 1, scope.currentDate.getFullYear());
+    var refreshCalendar = function (events) {
+        scope.month = monthGenegrator(scope.currentDate.getMonth() + 1, scope.currentDate.getFullYear(), events);
     }
 
     refreshCalendar();
@@ -245,7 +255,7 @@ var calendarLinkFunction = function (scope, element) {
 
 app.directive("calendar", function () {
     return {
-        restrict: "E",
+        restrict: "EA",
         scope: {
             content: '=calendarContent',
             assignedMonth: '=calendarMonth',

@@ -88,10 +88,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .cal-row-fluid [class*="cal-span"].hide {
   display: none;
 }
-[class*="cal-span"].pull-right,
-.cal-row-fluid [class*="cal-span"].pull-right {
-  float: right;
-}
 [class*="cal-span"]:hover {
       background-color: #ededed;
 }
@@ -120,7 +116,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     width: 100%;
     min-height: 75px;
     text-align:center;
-    & .content{
+    & #content{
       height: 100%;
       padding: 35px 10px 5px 10px;
       text-align: center;
@@ -133,20 +129,20 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   background: #fff;
     
     & [class*="cal-span"] {
-      min-height: 75px;
-      border-right: 1px solid #e1e1e1;
+        min-height: 75px;
+        border-right: 1px solid #e1e1e1;
     }
     & .cal-row-fluid [class*="cal-span"]:last-child {
-      border-right: 0px;
+        border-right: 0px;
     }
     & .cal-row-fluid {
-      border-bottom: 1px solid #e1e1e1;
+        border-bottom: 1px solid #e1e1e1;
     }
     & .cal-row-fluid:last-child {
-      border-bottom: 0px;
+        border-bottom: 0px;
     }
     & .cal-day-today span[data-cal-date] {
-      font-size: 2.2em;
+        font-size: 2.2em;
         padding-left:4px;
     }
 }

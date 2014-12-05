@@ -7708,9 +7708,6 @@ a.button {
 [class*="cal-span"].hide, .cal-row-fluid [class*="cal-span"].hide {
   display: none; }
 
-[class*="cal-span"].pull-right, .cal-row-fluid [class*="cal-span"].pull-right {
-  float: right; }
-
 [class*="cal-span"]:hover {
   background-color: #ededed; }
 
@@ -7734,7 +7731,7 @@ a.button {
   width: 100%;
   min-height: 75px;
   text-align: center; }
-  .cal-month-day .content {
+  .cal-month-day #content {
     height: 100%;
     padding: 35px 10px 5px 10px;
     text-align: center;
