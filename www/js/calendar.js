@@ -71,10 +71,50 @@ app.controller("MyController", function ($scope, $http) {
     success(function (data, status, headers, config) {
         $scope.events = data;
 
+
     }).
     error(function (data, status, headers, config) {
         // log error
     });
+});
+
+app.controller('MyController', function ($scope, $ionicPopup, $timeout) {
+
+    // Triggered on a button click, or some other target
+    $scope.showPopup = function () {
+        $scope.data = {}
+
+        // An elaborate, custom popup
+        var myPopup = $ionicPopup.show({
+            template: '<input type="password" ng-model="data.wifi">',
+            title: 'Enter Wi-Fi Password',
+            subTitle: 'Please use normal things',
+            scope: $scope,
+            buttons: [
+                {
+                    text: 'Cancel'
+                },
+                {
+                    text: '<b>Save</b>',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        if (!$scope.data.wifi) {
+                            //don't allow the user to close unless he enters wifi password
+                            e.preventDefault();
+                        } else {
+                            return $scope.data.wifi;
+                        }
+                    }
+      },
+    ]
+        });
+        myPopup.then(function (res) {
+            console.log('Tapped!', res);
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 3000);
+    };
 });
 
 var language = {
@@ -220,7 +260,44 @@ var calendarLinkFunction = function (scope, element) {
                 realDate,
                 outmonth = false,
                 content = "";
-            var events = [];
+            var events = [
+                {
+                    "id": "1",
+                    "title": "Example 1",
+                    "url": "http://www.example.com/",
+                    "description": "This is event description",
+                    "start": "2014-12-1",
+                    "end": "2014-12-04"
+                },
+                {
+                    "id": "2",
+                    "title": "Example 2",
+                    "url": "http://www.example.com/",
+                    "description": "This is event description",
+                    "start": "2014-12-2",
+                    "end": "2014-12-04"
+                },
+                {
+                    "id": "3",
+                    "title": "Example 3",
+                    "url": "http://www.example.com/",
+                    "description": "This is event description",
+                    "start": "2014-12-5",
+                    "end": "2014-12-04"
+                },
+                {
+                    "id": "4",
+                    "title": "Example 4 ",
+                    "url": "http://www.example.com/",
+                    "description": "This is event description",
+                    "start": "2014-12-25",
+                    "end": "2014-12-04"
+                }
+
+
+            ];
+
+
 
             if (startDate + i < 0) {
                 realDate = prevDaysOfMonth + startDate + i + 1;
@@ -232,12 +309,23 @@ var calendarLinkFunction = function (scope, element) {
                 realDate = startDate + i + 1;
                 content = getDateContent(year, month, realDate);
             }
+
+            var fullDate = year + "-" + month + "-" + realDate;
+            var dayEvents = [];
+
+            for (var m = 0; m < events.length; m++) {
+                if (events[m].start === fullDate && !outmonth) {
+                    dayEvents.push(events[m].title);
+                }   
+            }
+
             week.push({
                 "outmonth": outmonth,
                 "day": i,
                 "content": content,
                 "date": realDate,
-                "events": events
+                "fullDate": fullDate,
+                "events": dayEvents
 
             });
 
@@ -249,7 +337,7 @@ var calendarLinkFunction = function (scope, element) {
         scope.month = monthGenegrator(scope.currentDate.getMonth() + 1, scope.currentDate.getFullYear(), events);
     }
 
-    refreshCalendar();
+    refreshCalendar(scope.events);
 }
 
 

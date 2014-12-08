@@ -1,31 +1,39 @@
 <div class="calendar">
-	<div class="clearfix calendarHeader row"> 		
-		<div class="date">{{currentDate.getMonthFormatted() }}/{{currentDate.getFullYear() }}</div> 
-		<div class="btn-group"> 
-			<button class="button button-dark" ng-click="navigate.prevMotnth()">{{language.prevMonth}}</button> 
-			<button class="button button-dark" ng-click="navigate.thisMotnth()">{{language.thisMonth}}</button> 
-			<button class="button button-dark" ng-click="navigate.nextMotnth()">{{language.nextMonth}}</button> 
-		</div> 
-	</div> 
-	<div class="cal-row-fluid cal-row-head">
-		<div class="cal-span1">{{language.d1}}</div>
-		<div class="cal-span1">{{language.d2}}</div>
-		<div class="cal-span1">{{language.d3}}</div>
-		<div class="cal-span1">{{language.d4}}</div>
-		<div class="cal-span1">{{language.d5}}</div>
-		<div class="cal-span1">{{language.d6}}</div>
-		<div class="cal-span1">{{language.d0}}</div>
-	</div>
-	<div class="cal-month-box">
+    <div class="clearfix calendarHeader row">
 
-	<div class="cal-row-fluid" ng-repeat="week in month">
-		<div class="cal-span1 cal-cell" ng-repeat="day in week">
-			<div class="cal-month-day" ng-class="{'cal-day-outmonth' : day.outmonth , 'cal-day-weekend' : day.day == 6 || day.day == 7 , 'cal-day-today' : day.isToday }">
-				<span class="pull-right" data-cal-date="{{day.dateFormatted}}" data-cal-view="day">{{day.date}}</span>
-				<div class="content">			
-					<div ng-html="day.content"></div>			
-				</div>				
-			</div>
-		</div>
-	</div>
-</div>
+        <div class="btn-group">
+            <button class="left button button-dark" ng-click="navigate.prevMotnth()">{{language.prevMonth}}</button>
+            <div class="month-name">
+                <span>{{currentDate.getMonthName() }}
+			    {{currentDate.getFullYear() }}
+			    </span>
+
+            </div>
+            <button class="right button button-dark" ng-click="navigate.nextMotnth()">{{language.nextMonth}}</button>
+        </div>
+    </div>
+    <div class="cal-row-fluid cal-row-head">
+        <div class="cal-span1">{{language.d1}}</div>
+        <div class="cal-span1">{{language.d2}}</div>
+        <div class="cal-span1">{{language.d3}}</div>
+        <div class="cal-span1">{{language.d4}}</div>
+        <div class="cal-span1">{{language.d5}}</div>
+        <div class="cal-span1">{{language.d6}}</div>
+        <div class="cal-span1">{{language.d0}}</div>
+    </div>
+    <div class="cal-month-box">
+
+        <div class="cal-row-fluid" ng-repeat="week in month">
+            <div class="cal-span1 cal-cell" ng-repeat="day in week">
+                <div class="cal-month-day" ng-class="{'cal-day-outmonth' : day.outmonth , 'cal-day-weekend' : day.day == 6 || day.day == 7 , 'cal-day-today' : day.isToday }">
+                    <span data-cal-date="{{day.dateFormatted}}" data-cal-view="day">{{day.date}}</span>
+                    <div ng-controller="MyController" id="content">
+                       <div ng-repeat="event in events">
+                           
+                       </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

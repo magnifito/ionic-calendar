@@ -8,6 +8,9 @@
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
+    <feature name="Calendar">
+        <param name="android-package" value="nl.xservices.plugins.Calendar" />
+    </feature>
     <name>Calendar</name>
     <description>
         An Ionic Framework and Cordova project.
@@ -21,7 +24,4 @@
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="BackupWebStorage" value="none" />
-    <feature name="Calendar">
-        <param name="android-package" value="nl.xservices.plugins.Calendar" />
-    </feature>
 </widget>

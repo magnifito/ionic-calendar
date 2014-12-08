@@ -9,5 +9,12 @@ D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\com\ionicfr
 D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\com\ionicframework\calendar759432\R$string.class \
 D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\com\ionicframework\calendar759432\R$xml.class \
 D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\com\ionicframework\calendar759432\R.class \
+D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\nl\xservices\plugins\accessor\AbstractCalendarAccessor$Attendee.class \
+D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\nl\xservices\plugins\accessor\AbstractCalendarAccessor$Event.class \
+D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\nl\xservices\plugins\accessor\AbstractCalendarAccessor$KeyIndex.class \
+D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\nl\xservices\plugins\accessor\AbstractCalendarAccessor.class \
+D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\nl\xservices\plugins\accessor\CalendarProviderAccessor.class \
+D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\nl\xservices\plugins\accessor\LegacyCalendarAccessor.class \
+D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\nl\xservices\plugins\Calendar.class \
 D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\classes\org\apache\cordova\device\Device.class \
 D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\dexedLibs\classes-ff7507252d45fa5e2a7f0af596386cab.jar \

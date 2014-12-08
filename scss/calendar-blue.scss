@@ -191,6 +191,10 @@ span[data-cal-date] {
   color: #800080;
     padding-left:5px;
 }
+.cal-day-events {
+    background:url('../img/event.png');
+    background-repeat: no-repeat;
+}
 .bar-header {
     background-color:$faceblue;
     & h1 {

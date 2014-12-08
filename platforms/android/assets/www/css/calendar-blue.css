@@ -7654,24 +7654,23 @@ a.button {
   transition: none !important; }
 
 .calendarHeader {
-  margin: 0 auto;
   padding: 10px 0;
   text-align: center; }
-  .calendarHeader .date {
+  .calendarHeader .month-name {
     font-size: 20px;
     text-align: center;
     color: #000;
-    line-height: 28px;
-    border: 1px solid #DDD;
-    border-radius: 5px;
-    background: #FFF;
-    margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 15px;
-    padding-top: 10px; }
+    display: inline-block;
+    width: 30%;
+    height: 50px;
+    vertical-align: middle;
+    white-space: pre-line;
+    line-height: 25px; }
   .calendarHeader .btn-group {
     margin-bottom: 10px;
-    text-align: right; }
+    width: 100%; }
 
 [class*="cal-span"] {
   float: left;
@@ -7709,9 +7708,6 @@ a.button {
 [class*="cal-span"].hide, .cal-row-fluid [class*="cal-span"].hide {
   display: none; }
 
-[class*="cal-span"].pull-right, .cal-row-fluid [class*="cal-span"].pull-right {
-  float: right; }
-
 [class*="cal-span"]:hover {
   background-color: #ededed; }
 
@@ -7720,7 +7716,9 @@ a.button {
   font-weight: bolder;
   text-align: center;
   border: 1px solid #e1e1e1;
-  padding: 5px 0; }
+  padding: 5px 0;
+  background-color: #47639E;
+  color: #fff; }
   .cal-row-head [class*="cal-span"]:first-child [class*="cal-span"] small, .cal-row-head [class*="cal-span"] [class*="cal-span"] small {
     font-weight: normal; }
 
@@ -7733,7 +7731,7 @@ a.button {
   width: 100%;
   min-height: 75px;
   text-align: center; }
-  .cal-month-day .content {
+  .cal-month-day #content {
     height: 100%;
     padding: 35px 10px 5px 10px;
     text-align: center;
@@ -7794,3 +7792,15 @@ span[data-cal-date] {
 .cal-day-holiday span[data-cal-date] {
   color: #800080;
   padding-left: 5px; }
+
+.bar-header {
+  background-color: #47639E; }
+  .bar-header h1 {
+    color: #fff; }
+
+.button.button-dark {
+  background-color: #47639E;
+  margin-top: 27px; }
+
+.bar.bar-stable .title {
+  font-size: 25px; }
