@@ -52,16 +52,6 @@ var app = angular.module('ionic-calendar', ['ionic'])
                 }
             }
         })
-
-    .state('app.single', {
-        url: "/playlists/:playlistId",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/playlist.html",
-                controller: 'PlaylistCtrl'
-            }
-        }
-    });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/demo1');
 });
@@ -69,7 +59,8 @@ var app = angular.module('ionic-calendar', ['ionic'])
 app.controller("MyController", function ($scope, $http) {
     $http.get('js/events.txt').
     success(function (data, status, headers, config) {
-        $scope.events = data;
+
+
 
     }).
     error(function (data, status, headers, config) {
@@ -77,21 +68,41 @@ app.controller("MyController", function ($scope, $http) {
     });
 });
 
+app.controller('CalendarController', function ($scope, $ionicPopup, $timeout) {
+
+    // Triggered on a button click, or some other target
+    $scope.showPopup = function ($event, day) {
+        $scope.data = {}
+
+        if (day.events.length > 0) {
+            //show popup only if events on day cell
+
+            var $element = $event.currentTarget;
+
+            // An elaborate, custom popup
+            var myPopup = $ionicPopup.show({
+                templateUrl: '/templates/calendar/calendar-event-popup-template.html',
+                title: '' + day.date,
+                subTitle: '',
+                scope: $scope,
+                buttons: [{
+                    text: '<b>Close</b>',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        return 'cancel button'
+                    }
+                }, ]
+            });
+            myPopup.then(function (res) {
+            
+            });
+        }
+
+    };
+});
+
 var language = {
-
-    ms0: 'January',
-    ms1: 'February',
-    ms2: 'March',
-    ms3: 'April',
-    ms4: 'May',
-    ms5: 'June',
-    ms6: 'July',
-    ms7: 'August',
-    ms8: 'September',
-    ms9: 'October',
-    ms10: 'November',
-    ms11: 'December',
-
+    
     d0: 'Sun',
     d1: 'Mon',
     d2: 'Tue',
@@ -106,8 +117,109 @@ var language = {
 
 };
 
-var monthNames = ["Януари", "Февруари", "Март", "Април", "Май", "Юни",
-    "Юли", "Август", "Септември", "Октомври", "Ноември", "Декември"];
+/**
+ * Language settings
+ *
+ * @param lang
+ * @returns {{month_labels: Array, dow_labels: Array}}
+ */
+var calendar_language = function (lang) {
+    if (typeof (lang) == 'undefined' || lang === false) {
+        lang = 'en';
+    }
+
+    switch (lang.toLowerCase()) {
+    case 'de':
+        return {
+            month_labels: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+            dow_labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+        };
+        break;
+
+    case 'en':
+        return {
+            month_labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            dow_labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        };
+        break;
+
+    case 'ar':
+        return {
+            month_labels: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+            dow_labels: ["أثنين", "ثلاثاء", "اربعاء", "خميس", "جمعه", "سبت", "أحد"]
+        };
+        break;
+
+    case 'es':
+        return {
+            month_labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            dow_labels: ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"]
+        };
+        break;
+
+    case 'fr':
+        return {
+            month_labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+            dow_labels: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"]
+        };
+        break;
+
+    case 'it':
+        return {
+            month_labels: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+            dow_labels: ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]
+        };
+        break;
+
+    case 'nl':
+        return {
+            month_labels: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"],
+            dow_labels: ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"]
+        };
+        break;
+
+    case 'pt':
+        return {
+            month_labels: ["Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+            dow_labels: ["S", "T", "Q", "Q", "S", "S", "D"]
+        };
+        break;
+
+    case 'ru':
+        return {
+            month_labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+            dow_labels: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вск"]
+        };
+        break;
+
+    case 'se':
+        return {
+            month_labels: ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"],
+            dow_labels: ["Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"]
+        };
+        break;
+
+    case 'bg':
+        return {
+            month_labels: ["Януари", "Февруари", "Март", "Април", "Май", "Юни", "Юли", "Август", "Септември", "Октомври", "Ноември", "Декември"],
+            dow_labels: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нед"]
+        };
+        break;
+
+    case 'tr':
+        return {
+            month_labels: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+            dow_labels: ["Pts", "Salı", "Çar", "Per", "Cuma", "Cts", "Paz"]
+        };
+        break;
+    }
+
+};
+
+var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+
+
 
 // get month name
 Date.prototype.getMonthName = function () {
@@ -220,7 +332,40 @@ var calendarLinkFunction = function (scope, element) {
                 realDate,
                 outmonth = false,
                 content = "";
-            var events = [];
+            var events = [{
+                    "id": "01",
+                    "title": "New Year in Mexico",
+                    "eventType": "special-event",
+                    "description": "Celebrate with us!",
+                    "start": "2014-12-2",
+                    "end": "2014-12-04"
+                }, {
+                    "id": "02",
+                    "title": "New Year in Bulgaria",
+                    "url": "http://www.example.com/",
+                    "description": "Best offers!",
+                    "start": "2014-12-2",
+                    "end": "2014-12-04"
+                }, {
+                    "id": "03",
+                    "title": "Title 3",
+                    "url": "http://www.example.com/",
+                    "description": "This is event description",
+                    "start": "2014-12-5",
+                    "end": "2014-12-04"
+                }, {
+                    "id": "04",
+                    "title": "Title 4",
+                    "url": "http://www.example.com/",
+                    "description": "This is event description",
+                    "start": "2014-12-25",
+                    "end": "2014-12-04"
+                }
+
+
+            ];
+
+
 
             if (startDate + i < 0) {
                 realDate = prevDaysOfMonth + startDate + i + 1;
@@ -232,12 +377,23 @@ var calendarLinkFunction = function (scope, element) {
                 realDate = startDate + i + 1;
                 content = getDateContent(year, month, realDate);
             }
+
+            var fullDate = year + "-" + month + "-" + realDate;
+            var dayEvents = [];
+
+            for (var m = 0; m < events.length; m++) {
+                if (events[m].start === fullDate && !outmonth) {
+                    dayEvents.push(events[m].start + " | " + events[m].title, events[m].description);
+                }
+            }
+
             week.push({
                 "outmonth": outmonth,
                 "day": i,
                 "content": content,
                 "date": realDate,
-                "events": events
+                "fullDate": fullDate,
+                "events": dayEvents
 
             });
 
@@ -249,7 +405,7 @@ var calendarLinkFunction = function (scope, element) {
         scope.month = monthGenegrator(scope.currentDate.getMonth() + 1, scope.currentDate.getFullYear(), events);
     }
 
-    refreshCalendar();
+    refreshCalendar(scope.events);
 }
 
 

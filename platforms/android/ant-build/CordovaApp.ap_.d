@@ -44,6 +44,7 @@ D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\css\calendar-blue.
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\css\calendar-blue.min.css \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\css\calendar-dark.css \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\css\calendar-dark.min.css \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\img\event.png \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\img\ionic.png \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\js\calendar.js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\js\events.txt \
@@ -128,9 +129,11 @@ D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\plugins\nl.x-servi
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\plugins\org.apache.cordova.device\www \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\plugins\org.apache.cordova.device\www\device.js \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\browse.html \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\calendar \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\demo1.html \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\demo2.html \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\login.html \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\menu.html \
 D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\playlists.html \
+D:\ionic-calendar\ionic-calendar\platforms\android\assets\www\templates\calendar\calendar-event-popup-template.html \
 D:\ionic-calendar\ionic-calendar\platforms\android\ant-build\AndroidManifest.xml \
