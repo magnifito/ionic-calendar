@@ -27,10 +27,8 @@
 
             <div class="cal-span1 cal-cell" ng-repeat="day in week">
 
-                <div class="cal-month-day" ng-class="{'cal-day-outmonth' : day.outmonth , 'cal-day-weekend' : day.day == 6 || day.day == 7 , 'cal-day-today' : day.isToday}">
-
-                    <span data-cal-date="{{day.dateFormatted}} " data-cal-view="day " ng-controller="MyController" ng-click="showPopup()">{{day.date}}</span>
-
+                <div class="cal-month-day" ng-class="{'cal-day-outmonth' : day.outmonth , 'cal-day-weekend' : day.day == 6 || day.day == 7 , 'cal-day-today' : day.isToday}" ng-controller="CalendarController" ng-click="showPopup($event, day)">
+                    <span data-cal-date="{{day.dateFormatted}} " data-cal-view="day ">{{day.date}}</span>
                 </div>
 
             </div>
