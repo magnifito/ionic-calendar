@@ -5,8 +5,7 @@ var app = angular.module('ionic-calendar', ['ionic'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
+
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
@@ -24,7 +23,7 @@ var app = angular.module('ionic-calendar', ['ionic'])
         url: "/app",
         abstract: true,
         templateUrl: "templates/menu.html",
-        controller: 'MyController'
+        controller: 'CalendarController'
     })
 
     .state('app.demo1', {
@@ -56,17 +55,6 @@ var app = angular.module('ionic-calendar', ['ionic'])
     $urlRouterProvider.otherwise('/app/demo1');
 });
 
-app.controller("MyController", function ($scope, $http) {
-    $http.get('js/events.txt').
-    success(function (data, status, headers, config) {
-
-
-
-    }).
-    error(function (data, status, headers, config) {
-        // log error
-    });
-});
 
 app.controller('CalendarController', function ($scope, $ionicPopup, $timeout) {
 
@@ -81,7 +69,7 @@ app.controller('CalendarController', function ($scope, $ionicPopup, $timeout) {
 
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
-                templateUrl: '/templates/calendar/calendar-event-popup-template.html',
+                templateUrl: 'templates/calendar/calendar-event-popup-template.html',
                 title: '' + day.date,
                 subTitle: '',
                 scope: $scope,
@@ -94,15 +82,27 @@ app.controller('CalendarController', function ($scope, $ionicPopup, $timeout) {
                 }, ]
             });
             myPopup.then(function (res) {
-                
+
             });
         }
 
     };
 });
 
+app.controller("MyController", ['$scope', '$http',
+    function ($scope, $http)
+    {
+        $http.get('js/events.json').success(function (data) {
+
+            $scope.eventz = data;
+
+        });
+
+  }]);
+
+
 var language = {
-    
+
     d0: 'Sun',
     d1: 'Mon',
     d2: 'Tue',
@@ -263,6 +263,7 @@ var calendarLinkFunction = function (scope, element) {
     scope.language = language;
     scope.navigate = {};
 
+
     // month between 1 and 12
     var daysInMonth = function (month, year) {
         return new Date(year, month, 0).getDate();
@@ -336,27 +337,27 @@ var calendarLinkFunction = function (scope, element) {
                     "id": "01",
                     "title": "New Year in Mexico",
                     "eventType": "special-event",
-                    "description": "Celebrate with us!",
+                    "description": "Celebrate with us! Longer text, longer text!",
                     "start": "2014-12-2",
                     "end": "2014-12-04"
                 }, {
                     "id": "02",
                     "title": "New Year in Bulgaria",
-                    "url": "http://www.example.com/",
+                    "eventType": "normal-event",
                     "description": "Best offers!",
                     "start": "2014-12-2",
                     "end": "2014-12-04"
                 }, {
                     "id": "03",
                     "title": "Title 3",
-                    "url": "http://www.example.com/",
+                    "eventType": "normal-event",
                     "description": "This is event description",
                     "start": "2014-12-5",
                     "end": "2014-12-04"
                 }, {
                     "id": "04",
                     "title": "Christmas!",
-                    "url": "http://www.example.com/",
+                    "eventType": "special-event",
                     "description": "Woohoo!",
                     "start": "2014-12-25",
                     "end": "2014-12-04"
@@ -382,7 +383,7 @@ var calendarLinkFunction = function (scope, element) {
 
             for (var m = 0; m < events.length; m++) {
                 if (events[m].start === fullDate && !outmonth) {
-                    dayEvents.push(events[m].start + " | " + events[m].title, events[m].description);
+                    dayEvents.push(events[m]);
                 }
             }
 
@@ -396,15 +397,21 @@ var calendarLinkFunction = function (scope, element) {
 
             });
 
+
+
         }
         return week;
     }
+
+
 
     var refreshCalendar = function (events) {
         scope.month = monthGenegrator(scope.currentDate.getMonth() + 1, scope.currentDate.getFullYear(), events);
     }
 
     refreshCalendar(scope.events);
+
+
 }
 
 
@@ -418,6 +425,9 @@ app.directive("calendar", function () {
         },
         replace: true,
         link: calendarLinkFunction,
-        templateUrl: 'calendar-template.html'
+        templateUrl: 'calendar-template.html',
+        controller: function ($scope, $element) {
+            $scope.eventz = $scope.eventz;
+        },
     }
 });

@@ -7700,16 +7700,6 @@ a.button {
   .cal-row-fluid .cal-span1 {
     width: 14.28571%;
     *width: 14.23358%; }
-  .cal-row-fluid [class*="cal-span"].hide, .cal-row-fluid [class*="cal-span"].hide {
-    display: none; }
-  .cal-row-fluid:hover {
-    background-color: #fafafa; }
-
-[class*="cal-span"].hide, .cal-row-fluid [class*="cal-span"].hide {
-  display: none; }
-
-[class*="cal-span"]:hover {
-  background-color: #ededed; }
 
 .cal-row-head [class*="cal-span"]:first-child, .cal-row-head [class*="cal-span"] {
   min-height: auto;
@@ -7755,6 +7745,8 @@ a.button {
     padding-left: 4px; }
 
 span[data-cal-date] {
+  display: block;
+  float: right;
   font-size: 1.2em;
   font-weight: normal;
   opacity: 1.5;
@@ -7766,9 +7758,8 @@ span[data-cal-date] {
   -o-transition: all 0.1s ease-in-out;
   display: inline-block;
   padding-top: 10px;
+  padding-right: 10px;
   font-size: 20px; }
-  span[data-cal-date]:hover {
-    opacity: 1; }
 
 .cal-day-outmonth {
   background: #f0f0f0; }
@@ -7802,6 +7793,29 @@ span[data-cal-date] {
 .event-container {
   border: 1px solid #fff;
   font-size: 1.2em; }
+  .event-container .event-date {
+    text-align: center;
+    display: block; }
+  .event-container .event-description {
+    padding-top: 5px;
+    padding-bottom: 10px;
+    text-align: center;
+    display: block;
+    color: green; }
+  .event-container .event-title {
+    padding-bottom: 5px;
+    font-size: 1.2em;
+    text-align: center;
+    display: block; }
+  .event-container .ion-heart {
+    float: left; }
+  .event-container .ion-alert {
+    float: left; }
+
+.icon-container {
+  display: block;
+  padding-left: 8px;
+  float: left; }
 
 .bar-header {
   background-color: #47639E; }
