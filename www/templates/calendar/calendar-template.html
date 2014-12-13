@@ -27,7 +27,7 @@
 
             <div class="cal-span1 cal-cell" ng-repeat="day in week">
 
-                <div class="cal-month-day" ng-class="{'cal-day-outmonth' : day.outmonth , 'cal-day-weekend' : day.day == 6 || day.day == 7 , 'cal-day-today' : day.isToday}" ng-controller="CalendarController" ng-click="showPopup($event, day)">
+                <div class="cal-month-day" ng-class="{'cal-day-outmonth' : day.outmonth , 'cal-day-weekend' : day.day == 6 || day.day == 7 , 'cal-day-today' : day.isToday}" ng-controller="CalendarPopupController" ng-click="showPopup($event, day)">
 
                     <div class="icon-container" ng-repeat="event in day.events">
                         <div ng-switch on="event.eventType">
@@ -40,8 +40,6 @@
                         </div>
                     </div>
                     <span data-cal-date="{{day.dateFormatted}} " data-cal-view="day ">{{day.date}}</span>
-
-                    <div ng-controller="MyController"></div>
 
                 </div>
 

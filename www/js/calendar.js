@@ -1,10 +1,9 @@
 "use strict";
 
-
 var app = angular.module('ionic-calendar', ['ionic'])
 
-.run(function ($ionicPlatform) {
-    $ionicPlatform.ready(function () {
+.run(function($ionicPlatform) {
+    $ionicPlatform.ready(function() {
 
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -16,33 +15,23 @@ var app = angular.module('ionic-calendar', ['ionic'])
     });
 })
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
-    .state('app', {
-        url: "/app",
-        abstract: true,
-        templateUrl: "templates/menu.html",
-        controller: 'CalendarController'
-    })
-
-    .state('app.demo1', {
-        url: "/demo1",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/demo1.html"
+        .state('app', {
+            url: "/app",
+            abstract: true,
+            templateUrl: "templates/menu.html",
+            controller: 'CalendarEventController'
+        })
+        .state('app.demo1', {
+            url: "/demo1",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/demo1.html"
+                }
             }
-        }
-    })
-
-    .state('app.browse', {
-        url: "/browse",
-        views: {
-            'menuContent': {
-                templateUrl: "templates/browse.html"
-            }
-        }
-    })
+        })
         .state('app.demo2', {
             url: "/demo2",
             views: {
@@ -51,15 +40,93 @@ var app = angular.module('ionic-calendar', ['ionic'])
                 }
             }
         })
-    // if none of the above states are matched, use this as the fallback
+        // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/demo1');
 });
 
+app.service("EventService",
+            function( $http, $q ) {
 
-app.controller('CalendarController', function ($scope, $ionicPopup, $timeout) {
+                // Return public API.
+                return({
+                    getEvents: getEvents,
+                });
 
+
+                // ---
+                // PUBLIC METHODS.
+                // ---
+
+
+                 // I get all of the events in the remote collection.
+                function getEvents() {
+
+                    var request = $http({
+                        method: "get",
+                        url: "js/events.json",
+                        params: {
+                            action: "get"
+                        }
+                    });
+
+                    return( request.then( handleSuccess, handleError ) );
+
+                }
+
+
+                // ---
+                // PRIVATE METHODS.
+                // ---
+
+
+                // I transform the error response, unwrapping the application dta from
+                // the API response payload.
+                function handleError( response ) {
+
+                    // The API response from the server should be returned in a
+                    // nomralized format. However, if the request was not handled by the
+                    // server (or what not handles properly - ex. server error), then we
+                    // may have to normalize it on our end, as best we can.
+                    if (
+                        ! angular.isObject( response.data ) ||
+                        ! response.data.message
+                        ) {
+
+                        return( $q.reject( "An unknown error occurred." ) );
+
+                    }
+
+                    // Otherwise, use expected error message.
+                    return( $q.reject( response.data.message ) );
+
+                }
+
+
+                // I transform the successful response, unwrapping the application data
+                // from the API response payload.
+                function handleSuccess( response ) {
+
+                    return( response );
+
+                }
+
+            }
+        );
+
+app.controller("CalendarEventController", function($scope, EventService) {
+
+    $scope.events = [];
+    
+    EventService.getEvents().then(function(events) {
+        $scope.events = events;
+        $scope.$apply();
+    });
+});
+
+app.controller('CalendarPopupController', function($scope, $ionicPopup, $timeout) {
+    
     // Triggered on a button click, or some other target
-    $scope.showPopup = function ($event, day) {
+    $scope.showPopup = function($event, day) {
         $scope.data = {}
 
         if (day.events.length > 0) {
@@ -76,30 +143,19 @@ app.controller('CalendarController', function ($scope, $ionicPopup, $timeout) {
                 buttons: [{
                     text: '<b>Close</b>',
                     type: 'button-positive',
-                    onTap: function (e) {
+                    onTap: function(e) {
                         return 'cancel button'
                     }
                 }, ]
             });
-            myPopup.then(function (res) {
+            myPopup.then(function(res) {
 
             });
         }
 
     };
+
 });
-
-app.controller("MyController", ['$scope', '$http',
-    function ($scope, $http)
-    {
-        $http.get('js/events.json').success(function (data) {
-
-            $scope.eventz = data;
-
-        });
-
-  }]);
-
 
 var language = {
 
@@ -116,135 +172,43 @@ var language = {
     nextMonth: "Next >>",
 
 };
-
-/**
- * Language settings
- *
- * @param lang
- * @returns {{month_labels: Array, dow_labels: Array}}
- */
-var calendar_language = function (lang) {
-    if (typeof (lang) == 'undefined' || lang === false) {
-        lang = 'en';
-    }
-
-    switch (lang.toLowerCase()) {
-    case 'de':
-        return {
-            month_labels: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
-            dow_labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
-        };
-        break;
-
-    case 'en':
-        return {
-            month_labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            dow_labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-        };
-        break;
-
-    case 'ar':
-        return {
-            month_labels: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
-            dow_labels: ["أثنين", "ثلاثاء", "اربعاء", "خميس", "جمعه", "سبت", "أحد"]
-        };
-        break;
-
-    case 'es':
-        return {
-            month_labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-            dow_labels: ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"]
-        };
-        break;
-
-    case 'fr':
-        return {
-            month_labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-            dow_labels: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"]
-        };
-        break;
-
-    case 'it':
-        return {
-            month_labels: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
-            dow_labels: ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]
-        };
-        break;
-
-    case 'nl':
-        return {
-            month_labels: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"],
-            dow_labels: ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"]
-        };
-        break;
-
-    case 'pt':
-        return {
-            month_labels: ["Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-            dow_labels: ["S", "T", "Q", "Q", "S", "S", "D"]
-        };
-        break;
-
-    case 'ru':
-        return {
-            month_labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-            dow_labels: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вск"]
-        };
-        break;
-
-    case 'se':
-        return {
-            month_labels: ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"],
-            dow_labels: ["Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"]
-        };
-        break;
-
-    case 'bg':
-        return {
-            month_labels: ["Януари", "Февруари", "Март", "Април", "Май", "Юни", "Юли", "Август", "Септември", "Октомври", "Ноември", "Декември"],
-            dow_labels: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нед"]
-        };
-        break;
-
-    case 'tr':
-        return {
-            month_labels: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
-            dow_labels: ["Pts", "Salı", "Çar", "Per", "Cuma", "Cts", "Paz"]
-        };
-        break;
-    }
-
-};
-
 var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
 
 
 // get month name
-Date.prototype.getMonthName = function () {
+Date.prototype.getMonthName = function() {
     var currentDate = new Date();
     var month = monthNames[this.getMonth()];
     return month < 10 ? '0' + month : month;
 
 }
 
-Date.prototype.getMonthFormatted = function () {
+Date.prototype.getMonthFormatted = function() {
     var month = this.getMonth() + 1;
     return month < 10 ? '0' + month : month;
 }
 
 
-app.directive('ngHtml', function () {
-    return function (scope, element, attrs) {
-        scope.$watch(attrs.ngHtml, function (value) {
+app.directive('ngHtml', function() {
+    return function(scope, element, attrs) {
+        scope.$watch(attrs.ngHtml, function(value) {
             element[0].innerHTML = value;
         });
     }
 });
 
 
-var calendarLinkFunction = function (scope, element) {
+var calendarLinkFunction = function(scope, element, attrs) {
+    
+    scope.$watch('events', function(newValue, oldValue) {
+        if (newValue) { 
+            refreshCalendar(newValue);
+        }
+    }, true);
+
+
     var contentObj = scope.content;
     var targetMonth = parseInt(scope.assignedMonth, 10),
         targetYear = parseInt(scope.assignedyear, 10);
@@ -265,25 +229,25 @@ var calendarLinkFunction = function (scope, element) {
 
 
     // month between 1 and 12
-    var daysInMonth = function (month, year) {
+    var daysInMonth = function(month, year) {
         return new Date(year, month, 0).getDate();
     }
 
-    scope.navigate.prevMotnth = function () {
+    scope.navigate.prevMotnth = function() {
         scope.currentDate.setMonth(scope.currentDate.getMonth() - 1);
         refreshCalendar();
     }
-    scope.navigate.nextMotnth = function () {
+    scope.navigate.nextMotnth = function() {
         scope.currentDate.setMonth(scope.currentDate.getMonth() + 1);
         refreshCalendar();
     }
-    scope.navigate.thisMotnth = function () {
+    scope.navigate.thisMotnth = function() {
         scope.currentDate = new Date();
         refreshCalendar();
     }
 
     // month between 1 ~ 12
-    var getDateContent = function (year, month, date) {
+    var getDateContent = function(year, month, date) {
         if (contentObj != null && contentObj[year] != null &&
             contentObj[year][month] != null &&
             contentObj[year][month][date] != null) {
@@ -293,7 +257,7 @@ var calendarLinkFunction = function (scope, element) {
     }
 
     // month between 1 ~ 12
-    var monthGenegrator = function (month, year, events) {
+    var monthGenegrator = function(month, year, events) {
         var monthArray = [];
         var firstDay = new Date(year, month - 1, 1, 0, 0, 0, 0);
         //  weekDay between 1 ~ 7 , 1 is Monday, 7 is Sunday
@@ -325,7 +289,7 @@ var calendarLinkFunction = function (scope, element) {
     }
 
     //month between 1~12
-    var weekGenegrator = function (year, month, startDate, daysOfMonth, prevDaysOfMonth, events) {
+    var weekGenegrator = function(year, month, startDate, daysOfMonth, prevDaysOfMonth, events) {
         var week = [];
 
         for (var i = 1; i <= 7; i++) {
@@ -333,39 +297,6 @@ var calendarLinkFunction = function (scope, element) {
                 realDate,
                 outmonth = false,
                 content = "";
-            var events = [{
-                    "id": "01",
-                    "title": "New Year in Mexico",
-                    "eventType": "special-event",
-                    "description": "Celebrate with us! Longer text, longer text!",
-                    "start": "2014-12-2",
-                    "end": "2014-12-04"
-                }, {
-                    "id": "02",
-                    "title": "New Year in Bulgaria",
-                    "eventType": "normal-event",
-                    "description": "Best offers!",
-                    "start": "2014-12-2",
-                    "end": "2014-12-04"
-                }, {
-                    "id": "03",
-                    "title": "Title 3",
-                    "eventType": "normal-event",
-                    "description": "This is event description",
-                    "start": "2014-12-5",
-                    "end": "2014-12-04"
-                }, {
-                    "id": "04",
-                    "title": "Christmas!",
-                    "eventType": "special-event",
-                    "description": "Woohoo!",
-                    "start": "2014-12-25",
-                    "end": "2014-12-04"
-                }
-
-
-            ];
-
 
             if (startDate + i < 0) {
                 realDate = prevDaysOfMonth + startDate + i + 1;
@@ -381,10 +312,15 @@ var calendarLinkFunction = function (scope, element) {
             var fullDate = year + "-" + month + "-" + realDate;
             var dayEvents = [];
 
-            for (var m = 0; m < events.length; m++) {
-                if (events[m].start === fullDate && !outmonth) {
-                    dayEvents.push(events[m]);
+            //debugger;
+            if(events) {
+
+                for (var m = 0; m < events.length; m++) {
+                    if (events[m].start === fullDate && !outmonth) {
+                        dayEvents.push(events[m]);
+                    }
                 }
+
             }
 
             week.push({
@@ -397,37 +333,28 @@ var calendarLinkFunction = function (scope, element) {
 
             });
 
-
-
         }
         return week;
     }
 
-
-
-    var refreshCalendar = function (events) {
+    var refreshCalendar = function(events) {
         scope.month = monthGenegrator(scope.currentDate.getMonth() + 1, scope.currentDate.getFullYear(), events);
     }
 
-    refreshCalendar(scope.events);
-
-
+    refreshCalendar();
 }
 
-
-app.directive("calendar", function () {
+app.directive("calendar", function() {
     return {
         restrict: "EA",
         scope: {
             content: '=calendarContent',
             assignedMonth: '=calendarMonth',
-            assignedyear: '=calendarYear'
+            assignedyear: '=calendarYear',
+            events: '@'
         },
         replace: true,
         link: calendarLinkFunction,
-        templateUrl: 'calendar-template.html',
-        controller: function ($scope, $element) {
-            $scope.eventz = $scope.eventz;
-        },
+        templateUrl: 'templates/calendar/calendar-template.html'
     }
 });
